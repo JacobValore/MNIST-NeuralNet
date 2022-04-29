@@ -1,3 +1,8 @@
+/*
+ *	This code is not mine. I do not claim to have written the MnistReader class.
+ *	It is from https://github.com/jeffgriffith/mnist-reader
+ */
+
 import static java.lang.String.format;
 
 import java.io.ByteArrayOutputStream;
@@ -41,7 +46,7 @@ public class MnistReader {
 
 		return images;
 	}
-	
+
 	private static int[] readImage2(int size, ByteBuffer bb) {
 		int[] image = new int[size];
 		for (int i = 0; i < size; i++)

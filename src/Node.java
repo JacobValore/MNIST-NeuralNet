@@ -49,7 +49,7 @@ public class Node {
 	}
 	
 	public static double dCdA(double target, double activation) {
-		return 2*(target-activation);
+		return 2*(activation-target);
 	}
 	public static double dAdZ(double activation) {
 		return activation*(1-activation);
@@ -103,7 +103,7 @@ public class Node {
 		return weights[index];
 	}
 	public void setDelta(double target) {
-		delta = delta(target,this.activation);
+		delta = dCdA(target,this.activation);
 	}
 	public void setDelta() {
 		delta = delta(this.layerNumber,this.indexNumber,this.activation);

@@ -3,15 +3,15 @@ import java.util.Random;
 
 public class Main {
 	public final static int NUM_HIDDENLAYERS = 2;
-	public final static int NUM_NODES = 16;
+	public final static int NUM_NODES = 32;
 	public final static int BATCH_SIZE = 100;
 	public final static int REPETITIONS = 100;
 	
 	public final static double STDEV = 1e-6;
-	public final static int WEIGHT_RANGE = 8;
-	public final static int BIAS_RANGE = 8;
+	public final static int WEIGHT_RANGE = 1;
+	public final static int BIAS_RANGE = 1;
 	
-	public final static double LEARNING_RATE = 0.01;
+	public final static double LEARNING_RATE = 0.1;
 	public final static Random RAND = new Random();
 	
 	public static Node[][] node;
@@ -37,7 +37,7 @@ public class Main {
 		int numBatches = 60000/batchSize;
 		int target = 0;
 		for(int r = 0; r < repetitions; r++) {
-			int correct = 0;
+			double correct = 0;
 			for(int m = 0; m < numBatches; m++) {
 				for(int n = 0; n < batchSize; n++) {
 					//Load in image
@@ -80,8 +80,7 @@ public class Main {
 					for(int i = node.length-1; i > 0; i--) {
 						for(int j = 0; j < node[i].length; j++) {
 							if(i == node.length-1) {
-								node[i][j].setDelta(guess == target ? 1 : 0);
-								//node[i][j].setDelta(j == target ? 1 : 0);
+								node[i][j].setDelta(j == target ? 1 : 0);
 							} else {
 								node[i][j].setDelta();
 							}
@@ -108,7 +107,7 @@ public class Main {
 			}
 			System.out.println("Repetition #"+r);
 			System.out.println("# Correct:"+correct);
-			System.out.println("% Correct:"+Math.round(correct*10000/60000)/100.0);
+			System.out.println("% Correct:"+Math.round(correct*100*100/60000)/100.0);
 		}
 		//Now test for accuracy
 		System.out.println("Testing...");
